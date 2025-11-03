@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .easycoin-page {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #2d1a4a 100%);
+            padding-top: 80px;
+        }
+
+        .easycoin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #9333ea, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .coin-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(147, 51, 234, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(147, 51, 234, 0.3);
+        }
+
+        .coin-logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .coin-symbol {
+            background: linear-gradient(45deg, #9333ea, #7c3aed);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .coin-description {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .status-badge {
+            background: linear-gradient(45deg, #f59e0b, #d97706);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            display: inline-block;
+        }
+
+        .roadmap-section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #9333ea;
+            text-align: center;
+        }
+
+        .roadmap-timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #9333ea, #7c3aed);
+        }
+
+        .roadmap-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 80px;
+        }
+
+        .roadmap-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 60px;
+            height: 60px;
+            background: var(--surface-light);
+            border: 3px solid #9333ea;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .roadmap-content {
+            background: var(--surface-light);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .roadmap-phase {
+            color: #9333ea;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .roadmap-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .roadmap-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .current-phase {
+            border-color: #9333ea;
+            box-shadow: 0 5px 20px rgba(147, 51, 234, 0.2);
+        }
+
+        .current-phase .roadmap-icon {
+            background: #9333ea;
+            color: white;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: var(--surface-light);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #9333ea;
+            box-shadow: 0 10px 30px rgba(147, 51, 234, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .tokenomics {
+            background: var(--surface-light);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-bottom: 3rem;
+            border: 2px solid #9333ea;
+        }
+
+        .tokenomics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .token-item {
+            padding: 1.5rem;
+        }
+
+        .token-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #9333ea;
+            margin-bottom: 0.5rem;
+        }
+
+        .token-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .warning-section {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .warning-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .warning-title {
+            color: #f59e0b;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .warning-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #9333ea, #7c3aed);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(147, 51, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--surface-light);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .community-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .community-link {
+            background: var(--surface-light);
+            color: var(--text);
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .community-link:hover {
+            background: #9333ea;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <span class="logo-icon">🟣</span>
+                    <span class="logo-text">CryptoTasks</span>
+                </div>
+                <a href="/" class="btn btn-secondary">← На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="easycoin-page">
+        <div class="easycoin-container">
+            <h1 class="page-title">Easy Coin (EC)</h1>
+            
+            <div class="coin-header">
+                <div class="coin-logo">🟣</div>
+                <div class="coin-symbol">EC - Easy Coin</div>
+                <p class="coin-description">
+                    Криптовалюта будущего, созданная для массового adoption. 
+                    Простота, скорость и доступность в одном решении.
+                </p>
+                <div class="status-badge">🚀 В стадии активного развития</div>
+            </div>
+
+            <!-- Предупреждение о листинге -->
+            <div class="warning-section">
+                <div class="warning-icon">⚠️</div>
+                <h3 class="warning-title">Информация о листинге</h3>
+                <p class="warning-text">
+                    На данный момент Easy Coin не торгуется на биржах. <br>
+                    Токен находится в стадии активного развития и тестирования. <br>
+                    Информация о будущих листингах будет опубликована в наших официальных каналах.
+                </p>
+            </div>
+
+            <!-- Дорожная карта -->
+            <div class="roadmap-section">
+                <h2 class="section-title">Дорожная карта</h2>
+                <div class="roadmap-timeline">
+                    <!-- Текущая фаза -->
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">🚀</div>
+                        <div class="roadmap-content current-phase">
+                            <div class="roadmap-phase">Фаза 1 - ТЕКУЩАЯ</div>
+                            <h3 class="roadmap-title">Разработка и тестирование</h3>
+                            <p class="roadmap-description">
+                                • Создание основной блокчейн-инфраструктуры<br>
+                                • Разработка смарт-контрактов<br>
+                                • Тестирование безопасности и производительности<br>
+                                • Создание сообщества ранних последователей
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Будущие фазы -->
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">🔧</div>
+                        <div class="roadmap-content">
+                            <div class="roadmap-phase">Фаза 2 - ПЛАНИРУЕТСЯ</div>
+                            <h3 class="roadmap-title">Запуск основной сети</h3>
+                            <p class="roadmap-description">
+                                • Запуск основной сети Easy Coin<br>
+                                • Разработка кошельков и инструментов<br>
+                                • Партнерства с проектами<br>
+                                • Программа баунти и эирдропов
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">📈</div>
+                        <div class="roadmap-content">
+                            <div class="roadmap-phase">Фаза 3 - ПЕРСПЕКТИВЫ</div>
+                            <h3 class="roadmap-title">Расширение экосистемы</h3>
+                            <p class="roadmap-description">
+                                • Листинг на DEX биржах<br>
+                                • Разработка DeFi приложений<br>
+                                • Мобильные приложения<br>
+                                • Глобальное распространение
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="roadmap-item">
+                        <div class="roadmap-icon">🌍</div>
+                        <div class="roadmap-content">
+                            <div class="roadmap-phase">Фаза 4 - БУДУЩЕЕ</div>
+                            <h3 class="roadmap-title">Массовый adoption</h3>
+                            <p class="roadmap-description">
+                                • Листинг на топовых CEX биржах<br>
+                                • Партнерства с ритейлерами<br>
+                                • Интеграция с платежными системами<br>
+                                • Глобальное признание
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Преимущества -->
+            <div>
+                <h2 class="section-title">Почему Easy Coin?</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3 class="feature-title">Простота</h3>
+                        <p class="feature-description">
+                            Интуитивно понятный дизайн для пользователей любого уровня. 
+                            Никаких сложных технических терминов.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">Скорость</h3>
+                        <p class="feature-description">
+                            Мгновенные транзакции благодаря современной 
+                            блокчейн-архитектуре нового поколения.
+                        </p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💰</div>
+                        <h3 class="feature-title">Доступность</h3>
+                        <p class="feature-description">
+                            Низкие комиссии делают Easy Coin идеальным 
+                            решением для микроплатежей и повседневного использования.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3 class="feature-title">Безопасность</h3>
+                        <p class="feature-description">
+                            Передовые алгоритмы безопасности и децентрализованная 
+                            архитектура защищают ваши средства.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🌱</div>
+                        <h3 class="feature-title">Экологичность</h3>
+                        <p class="feature-description">
+                            Energy-efficient алгоритм консенсуса делает Easy Coin 
+                            экологически чистой криптовалютой.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3 class="feature-title">Перспективы</h3>
+                        <p class="feature-description">
+                            Активная разработка и амбициозная дорожная карта 
+                            открывают большие возможности для роста.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Токеномика -->
+            <div class="tokenomics">
+                <h2 class="section-title">Токеномика</h2>
+                <div class="tokenomics-grid">
+                    <div class="token-item">
+                        <div class="token-value">10B</div>
+                        <div class="token-label">Общая эмиссия</div>
+                    </div>
+                    <div class="token-item">
+                        <div class="token-value">40%</div>
+                        <div class="token-label">Сообщество</div>
+                    </div>
+                    <div class="token-item">
+                        <div class="token-value">25%</div>
+                        <div class="token-label">Развитие</div>
+                    </div>
+                    <div class="token-item">
+                        <div class="token-value">20%</div>
+                        <div class="token-label">Команда</div>
+                    </div>
+                    <div class="token-item">
+                        <div class="token-value">15%</div>
+                        <div class="token-label">Резерв</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Призыв к действию -->
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <h3 style="color: #9333ea; margin-bottom: 1rem;">Присоединяйтесь к сообществу!</h3>
+                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 2rem;">
+                    Станьте частью растущего сообщества Easy Coin и участвуйте в развитии 
+                    криптовалюты будущего уже сегодня.
+                </p>
+                
+                <div class="community-links">
+                    <a href="#" class="community-link">📢 Telegram</a>
+                    <a href="#" class="community-link">🐦 Twitter</a>
+                    <a href="#" class="community-link">📖 GitHub</a>
+                    <a href="#" class="community-link">💬 Discord</a>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <a href="/tap" class="btn">🟣 Начать зарабатывать EC</a>
+                <a href="/" class="btn btn-secondary">📊 На главную</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

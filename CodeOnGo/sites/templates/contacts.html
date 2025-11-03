@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <span class="logo-icon">₿</span>
+                    <span class="logo-text">CryptoTasks</span>
+                </div>
+                <a href="/" class="btn-task">На главную</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="padding: 120px 0; margin-top: 80px;">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Свяжитесь с нами</h1>
+                <p class="hero-subtitle">Есть вопросы? Мы всегда рады помочь!</p>
+                
+                <div class="contact-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                    <div class="task-card">
+                        <h3 style="margin-bottom: 1rem;">📧 Email поддержка</h3>
+                        <p style="color: var(--primary); font-weight: bold;">{{.Email}}</p>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);">Ответ в течение 24 часов</p>
+                    </div>
+                    
+                    <div class="task-card">
+                        <h3 style="margin-bottom: 1rem;">💬 Telegram</h3>
+                        <p style="color: var(--primary); font-weight: bold;">{{.TG}}</p>
+                        <p style="margin-top: 1rem; color: var(--text-secondary);">Быстрая поддержка в чате</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon">₿</span>
+                    <span>CryptoTasks</span>
+                </div>
+                <div class="footer-links">
+                    <a href="/">Главная</a>
+                    <a href="#">Документация</a>
+                    <a href="#">Политика конфиденциальности</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

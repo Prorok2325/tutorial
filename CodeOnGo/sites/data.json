@@ -1,0 +1,31 @@
+{
+  "users": {
+    "Tonton232627": {
+      "username": "Tonton232627",
+      "balance": 50,
+      "completed": 0,
+      "member_since": "31 October 2025",
+      "level": 1,
+      "rank": "Новичок",
+      "total_earned": 62.80000000000018,
+      "success_rate": 0,
+      "current_streak": 0,
+      "referrals": 0,
+      "is_guest": false
+    },
+    "guest": {
+      "username": "Гость",
+      "balance": 124.5,
+      "completed": 47,
+      "member_since": "31 October 2025",
+      "level": 5,
+      "rank": "Эксперт",
+      "total_earned": 124.99999999999997,
+      "success_rate": 92,
+      "current_streak": 12,
+      "referrals": 8,
+      "is_guest": false
+    }
+  },
+  "tap_balance": 13.299999999999969
+}

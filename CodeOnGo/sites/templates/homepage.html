@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="nav">
+                <div class="logo">
+                    <span class="logo-icon">🟣</span>
+                    <span class="logo-text">CryptoTasks</span>
+                </div>
+                <div class="user-info">
+                    {{if .IsLoggedIn}}
+                    <div class="user-wallet">
+                        <!-- Используем TotalBalance вместо User.Balance -->
+                        <span class="wallet-balance">{{printf "%.2f" .TotalBalance}} EC</span>
+                        <span class="user-name">{{.User.Username}}</span>
+                    </div>
+                    <a href="/account" class="account-btn" title="Мой аккаунт">
+                        <div class="user-avatar">
+                            <div class="avatar">👤</div>
+                        </div>
+                    </a>
+                    {{else}}
+                    <div class="user-wallet">
+                        <span class="wallet-balance">0.00 EC</span>
+                        <span class="user-name">Не авторизован</span>
+                    </div>
+                    <a href="/login" class="account-btn" title="Войти в аккаунт">
+                        <div class="user-avatar">
+                            <div class="avatar">🔐</div>
+                        </div>
+                    </a>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Зарабатывай Easy Coin</span>
+                    выполняя задания
+                </h1>
+                <p class="hero-subtitle">Easy Coin (EC) - простая и доступная криптовалюта для каждого</p>
+                
+                <!-- Блок информации о Easy Coin -->
+                <div class="easycoin-info" style="background: rgba(147, 51, 234, 0.1); padding: 2rem; border-radius: 15px; margin: 2rem 0; border: 1px solid rgba(147, 51, 234, 0.3);">
+                    <h3 style="color: #9333ea; margin-bottom: 1rem;">🟣 Что такое Easy Coin?</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; text-align: left;">
+                        <div>
+                            <strong>🎯 Простота</strong>
+                            <p style="margin: 0.5rem 0; font-size: 0.9rem;">Интуитивно понятная криптовалюта</p>
+                        </div>
+                        <div>
+                            <strong>⚡ Скорость</strong>
+                            <p style="margin: 0.5rem 0; font-size: 0.9rem;">Мгновенные транзакции</p>
+                        </div>
+                        <div>
+                            <strong>💰 Доступность</strong>
+                            <p style="margin: 0.5rem 0; font-size: 0.9rem;">Низкие комиссии</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Кнопка для перехода на страницу информации -->
+                    <div style="margin-top: 1.5rem;">
+                        <a href="/easycoin" class="btn" style="background: linear-gradient(45deg, #9333ea, #7c3aed); color: white; text-decoration: none; padding: 0.8rem 1.5rem; border-radius: 10px; font-weight: 600;">
+                            📖 Узнать больше о Easy Coin
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-value">{{.Stats.total_users}}+</div>
+                        <div class="stat-label">Пользователей</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">{{.Stats.active_tasks}}</div>
+                        <div class="stat-label">Активных заданий</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">{{.Stats.online_now}}</div>
+                        <div class="stat-label">Онлайн сейчас</div>
+                    </div>
+                </div>
+
+                <!-- Кнопки действий -->
+                <div class="navigation" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 3rem;">
+                    {{if .IsLoggedIn}}
+                    <a href="/tap" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.5rem; text-align: center; background: linear-gradient(45deg, #9333ea, #7c3aed);">
+                        🟣 Начать тапать EC 
+                        <small style="display: block; font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                            Заработано тапом: <span id="tapBalance">{{.TapBalance | printf "%.2f"}}</span> EC
+                        </small>
+                    </a>
+                    <a href="/account" class="btn btn-secondary" style="font-size: 1.2rem; padding: 1.5rem; text-align: center;">
+                        👤 Мой аккаунт
+                        <small style="display: block; font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                            Общий баланс: {{printf "%.2f" .TotalBalance}} EC
+                        </small>
+                    </a>
+                    {{else}}
+                    <a href="/register" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.5rem; text-align: center; background: linear-gradient(45deg, #9333ea, #7c3aed);">
+                        🚀 Начать зарабатывать
+                        <small style="display: block; font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                            Зарегистрируйтесь и получите 50 EC бонус!
+                        </small>
+                    </a>
+                    <a href="/login" class="btn btn-secondary" style="font-size: 1.2rem; padding: 1.5rem; text-align: center;">
+                        🔐 Войти в аккаунт
+                        <small style="display: block; font-size: 0.9rem; margin-top: 0.5rem; opacity: 0.9;">
+                            Уже есть аккаунт? Войдите!
+                        </small>
+                    </a>
+                    {{end}}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tasks-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Доступные задания</h2>
+                <div class="filter-tabs">
+                    <button class="filter-tab active">Все</button>
+                    <button class="filter-tab">Социальные</button>
+                    <button class="filter-tab">Разработка</button>
+                    <button class="filter-tab">Контент</button>
+                </div>
+            </div>
+
+            <div class="tasks-grid">
+                {{range .Tasks}}
+                <div class="task-card {{.Difficulty}} {{.Status}}">
+                    <div class="task-header">
+                        <span class="task-category {{.Category}}">{{.Category}}</span>
+                        <span class="task-difficulty {{.Difficulty}}">{{.Difficulty}}</span>
+                    </div>
+                    <h3 class="task-title">{{.Title}}</h3>
+                    <p class="task-description">{{.Description}}</p>
+                    <div class="task-footer">
+                        <div class="task-reward">
+                            <span class="reward-icon">🎯</span>
+                            <span class="reward-amount">{{.Reward}}</span>
+                        </div>
+                        {{if eq .Status "available"}}
+                        <button class="btn-task" data-task="{{.ID}}">Взять задание</button>
+                        {{else}}
+                        <button class="btn-task completed" disabled>Выполнено</button>
+                        {{end}}
+                    </div>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="container">
+            <h2>Как это работает?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Зарегистрируйтесь</h3>
+                    <p>Создайте аккаунт и получите бонус 50 EC</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Выполняйте задания</h3>
+                    <p>Выбирайте задания и следуйте инструкциям</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Зарабатывайте EC</h3>
+                    <p>Получайте Easy Coin за выполнение заданий</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon">🟣</span>
+                    <span>CryptoTasks</span>
+                </div>
+                <div class="footer-links">
+                    <a href="/contacts">Контакты</a>
+                    <a href="/easycoin">О Easy Coin</a>
+                    <a href="/register">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Функция для обновления баланса с тапалки
+        function updateTapBalance() {
+            fetch('/api/get-balance')
+                .then(response => response.json())
+                .then(data => {
+                    const balanceElement = document.getElementById('tapBalance');
+                    if (balanceElement) {
+                        balanceElement.textContent = data.balance.toFixed(2);
+                    }
+                })
+                .catch(error => {
+                    console.log('Ошибка обновления баланса:', error);
+                });
+        }
+
+        // Обновляем баланс каждые 3 секунды (только для авторизованных)
+        {{if .IsLoggedIn}}
+        setInterval(updateTapBalance, 3000);
+        {{end}}
+
+        // Обновляем сразу при загрузке
+        document.addEventListener('DOMContentLoaded', function() {
+            {{if .IsLoggedIn}}
+            updateTapBalance();
+            {{end}}
+        });
+    </script>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
